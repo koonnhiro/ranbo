@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>モバイルオーダーQR</title>
+        <title>QRコードリーダー</title>
     </head>
     <body>
         <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
@@ -19,10 +19,18 @@
                     liffId: myLiffId
                 })
                 .then(() => {
-                    liff.scanCode();
+                    liff.scanCode().then(result => {
+                        const stringifiedResult = result.value;
+                        liff.openWindow({
+                            url: stringifiedResult,
+                            external: false
+                        });
+                    }).catch(err => {
+                        window.alert('scanCode failed!');
+                    });
                 })
                 .catch((err) => {
-                    window.alert('失敗しました。');
+                    window.alert('Something went wrong with LIFF initialization.');
                 });
             }
             
