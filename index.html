@@ -19,7 +19,7 @@
                     liffId: myLiffId
                 })
                 .then(() => {
-                    liff.scanCode().then(result => {
+                    liff.scanCodeV2().then(result => {
                         const stringifiedResult = result.value;
                         liff.openWindow({
                             url: stringifiedResult,
